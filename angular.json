@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "transfer-service"
+  "defaultProject": "transfer-service",
+  "cli": {
+    "analytics": "d01e1d30-7335-4c37-82e5-3fd13f64cb51"
+  }
 }
