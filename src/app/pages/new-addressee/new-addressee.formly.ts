@@ -37,7 +37,7 @@ export class FieldsNewAdressee {
       fieldGroup: [
         {
           className: 'col-md-6',
-          key: 'banco',
+          key: 'banco_id',
           type: 'select',
           templateOptions: {
             label: 'Banco',
@@ -45,13 +45,13 @@ export class FieldsNewAdressee {
             options: this.dataSharedService.listBank()
           }
         },
-        this.getSimpleForm('cuenta', 'Tipo de Cuenta', true)
+        this.getSimpleForm('tipo_cuenta', 'Tipo de Cuenta', true)
       ],
     },
     {
       fieldGroupClassName: 'row',
       fieldGroup: [
-        this.getSimpleForm('nroCuenta', 'N° de Cuenta', true)
+        this.getSimpleForm('nro_cuenta', 'N° de Cuenta', true)
       ],
     },
   ];

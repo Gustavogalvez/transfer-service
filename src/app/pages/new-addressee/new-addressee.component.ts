@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { AddresseeService } from 'src/app/services/addressee.service';
 import { DataSharedService } from 'src/app/services/data-shared.service';
 import { FieldsNewAdressee } from './new-addressee.formly';
 
@@ -13,13 +14,19 @@ export class NewAddresseeComponent implements OnInit {
   model: any = {};
   fields = new FieldsNewAdressee(this.dataSharedService).fields;
 
-  constructor(private dataSharedService: DataSharedService) { }
+  constructor(
+    private dataSharedService: DataSharedService,
+    private addreesseeService: AddresseeService
+    ) { }
 
   ngOnInit(): void {}
 
   newAddressee() {
     if (this.form.valid) {
       console.log(this.model);
+      this.addreesseeService.newAddressee(this.model).subscribe(resp => {
+        console.log(resp);
+      });
     }
   }
 
