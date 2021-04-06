@@ -1,0 +1,13 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="mat-elevation-z2 rounded-lg p-2 w-100">
+      <h1 class="text-center">Nuevo Destinatario</h1>
+      <form [formGroup]="form" (ngSubmit)="newAddressee()">
+        <formly-form [model]="model" [form]="form" [fields]="fields"></formly-form>
+        <div class="d-flex">
+          <button class="mx-auto" mat-raised-button color="primary" type="submit">Crear</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,11 +1,14 @@
 <mat-toolbar class="mat-elevation-z6" color="primary">
-  <div class="container d-flex">
-    <span>Mi Banco</span>
-    <span *ngIf="dataSharedService.breadCrumb"> - {{dataSharedService.breadCrumb}}</span>
-    <div class="ml-auto">
-      <button mat-raised-button class="mx-2">Nuevo Destinatario</button>
-      <button mat-raised-button class="mx-2">Transferir</button>
-      <button mat-raised-button class="mx-2">Historial</button>
+  <div class="container">
+    <div class="row d-flex">
+      <span>Mi Banco</span>
+      <span *ngIf="dataSharedService.breadCrumb"> - {{dataSharedService.breadCrumb}}</span>
+      <div class="ml-auto">
+        <button mat-flat-button routerLink="new-addressee" class="mx-2">Nuevo Destinatario</button>
+        <button mat-flat-button routerLink="transfer" class="mx-2">Transferir</button>
+        <button mat-flat-button routerLink="record" class="mx-2">Historial</button>
+      </div>
     </div>
   </div>
 </mat-toolbar>
+<router-outlet></router-outlet>

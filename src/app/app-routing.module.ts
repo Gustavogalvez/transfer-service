@@ -4,8 +4,15 @@ import { NavigationComponent } from './shared/navigation/navigation.component';
 
 const routes: Routes = [
   {
-    path: '', component: NavigationComponent
-  }
+    path: '',
+    component: NavigationComponent,
+    children: [
+      {
+        path: 'new-addressee',
+        loadChildren: () => import('./pages/new-addressee/new-addressee.module').then(m => m.NewAddresseeModule)
+      }
+    ]
+  },
 ];
 
 @NgModule({
