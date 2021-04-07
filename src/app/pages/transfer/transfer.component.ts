@@ -13,7 +13,6 @@ import { TransferService } from 'src/app/services/transfer.service';
 @Component({
   selector: 'app-transfer',
   templateUrl: './transfer.component.html',
-  styleUrls: ['./transfer.component.scss'],
   providers: [
     { provide: MatFormFieldControl, useExisting: TransferComponent }
   ]
@@ -21,10 +20,20 @@ import { TransferService } from 'src/app/services/transfer.service';
 export class TransferComponent implements OnInit {
   addressee = new FormControl();
   monto!: number;
-  filteredOptions!: Observable<IAddressee[]>;
-  loading: boolean = false;
+
+
   bancos!: any[];
+  filteredOptions!: Observable<IAddressee[]>;
+
+
+  /** Loading para cuando se busca un destinatario */
+  loadingAddressee: boolean = false;
+  /** Loading para cuando se envía la transferencia */
   loadingSendData!: boolean;
+  /**
+   * Bandera para saber si existen destinatarios
+   *
+   * *Realmente si no existen se redirecciona a crear un destinatario */
   sinDestinatario: boolean = true;
 
   constructor(
@@ -39,6 +48,9 @@ export class TransferComponent implements OnInit {
     this.dataSharedService.listBank().subscribe(bancos => {
       this.bancos = bancos;
     });
+
+
+    /** Se inicializa las opciones del filtro (Destinatarios) */
     this.filteredOptions = this.addresseeService.retrieveAddressees('').pipe(
       map(data => {
         this.sinDestinatario = data.length === 0;
@@ -51,29 +63,43 @@ export class TransferComponent implements OnInit {
         return data;
       })
     );
+
+
+    /** Se suscribe a los cambios en el formControl */
     this.addressee.valueChanges.subscribe(value => {
+      // Este if es porque se reutiliza el formControl para asignar el destinatario completo
       if (typeof value === 'string') {
-        this.loading = true;
+        this.loadingAddressee = true;
+        // Se asigna el observable de las opciones con el texto correspondiente
         this.filteredOptions = this.addresseeService.retrieveAddressees(value).pipe(
           map(data => {
-            this.loading = false;
+            this.loadingAddressee = false;
             return data;
           })
         );
       }
     });
+
+
   }
 
+  /** Función que parcha el formControl (addressee) con el banco encontrado por id */
   addBanco() {
     let banco = this.bancos.find(banco =>  banco.value.includes(this.addressee.value.banco_id));
     this.addressee.patchValue({...this.addressee.value, banco});
-    // this.transferService.listTransferByAddressee(this.addressee.value.id).subscribe((resp) => {});
   }
 
+  /** Función para desplegar en el autocomplete */
   displayFn(addressee: IAddressee) {
     return addressee?.nombre ? (addressee.nombre + ' - ' + addressee.rut) : '';
   }
 
+  /**
+   * Función para transferir
+   * * Se asegura de que estén correctos los datos
+   * * Setea los loading en true o false según corresponda
+   * * Si todo sale bien, reinicia el monto a 0 y emite una alerta
+   */
   transferir() {
     if ((this.addressee?.value?.id !== 0) && (this.monto > 0)) {
       this.loadingSendData = true;

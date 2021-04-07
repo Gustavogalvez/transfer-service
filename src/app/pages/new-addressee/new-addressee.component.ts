@@ -7,15 +7,17 @@ import { FieldsNewAdressee } from './new-addressee.formly';
 
 @Component({
   selector: 'app-new-addresse',
-  templateUrl: './new-addressee.component.html',
-  styleUrls: ['./new-addressee.component.scss']
+  templateUrl: './new-addressee.component.html'
 })
 export class NewAddresseeComponent implements OnInit {
   /** https://github.com/angular/components/issues/4190#issuecomment-305031716 */
   @ViewChild('f') myNgForm: any;
+
   form = new FormGroup({});
   model: any = {};
+  /** Inicializa la clase que contiene la configuración de la forma de tipo FormlyFieldConfig[] */
   fields = new FieldsNewAdressee(this.dataSharedService).fields;
+
   loading = false;
 
   constructor(
@@ -26,6 +28,13 @@ export class NewAddresseeComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  /**
+   * Agrega un destinatario
+   * * Comprueba si la forma es valida
+   * * Asigna el loading a true y false según corresponda
+   * * Si todo salió bien, resetea la forma y envía una alerta
+   * ------
+   */
   newAddressee() {
     if (this.form.valid) {
       this.loading = true;

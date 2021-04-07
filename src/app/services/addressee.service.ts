@@ -15,10 +15,20 @@ export class AddresseeService {
 
   constructor(private http: HttpClient) {}
 
+  /**
+   * Obtiene el listado de los destinatarios filtrados por el nombre entregado
+   * @param search Nombre a buscar
+   * @returns Observable<IAddressee[]>
+   */
   retrieveAddressees(search?: string): Observable<IAddressee[]> {
     return this.http.get<IAddressee[]>(this.apiUrl + 'list' + (search ? `/${search}` : ''));
   }
 
+  /**
+   * Agrega un destinatario
+   * @param addressee Destinatario de tipo IAddressee
+   * @returns Observable<{msg}>
+   */
   newAddressee(addressee: IAddressee) {
     return this.http.post(this.apiUrl + 'add', addressee);
   }

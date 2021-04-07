@@ -11,6 +11,10 @@ export class DataSharedService {
 
   constructor(private http: HttpClient) {}
 
+  /**
+   * Obtiene los bancos
+   * @returns Observable<any[]>
+   */
   listBank() {
     return this.http
     .get('https://bast.dev/api/banks.php')

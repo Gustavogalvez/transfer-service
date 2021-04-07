@@ -1,3 +1,6 @@
+/**
+ * Interfaz para los destinatarios
+ */
 export interface IAddressee {
   nombre: string;
   rut: string;

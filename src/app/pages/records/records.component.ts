@@ -6,8 +6,7 @@ import { TransferService } from 'src/app/services/transfer.service';
 
 @Component({
   selector: 'app-records',
-  templateUrl: './records.component.html',
-  styleUrls: ['./records.component.scss']
+  templateUrl: './records.component.html'
 })
 export class RecordsComponent implements OnInit {
   transfers!: ITransfer[];
@@ -15,7 +14,7 @@ export class RecordsComponent implements OnInit {
   constructor(
     private transferService: TransferService,
     private dataSharedService: DataSharedService
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     forkJoin([

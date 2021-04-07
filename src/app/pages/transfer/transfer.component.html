@@ -13,7 +13,7 @@
             [formControl]="addressee"
             [matAutocomplete]="auto" required>
 
-          <mat-spinner matSuffix *ngIf="loading" [diameter]="30"></mat-spinner>
+          <mat-spinner matSuffix *ngIf="loadingAddressee" [diameter]="30"></mat-spinner>
           <mat-error *ngIf="addressee.invalid">Debe ingresar un destinatario valido!</mat-error>
           <mat-autocomplete #auto="matAutocomplete" (optionSelected)="addBanco()" [displayWith]="displayFn">
             <mat-option *ngFor="let addressee of filteredOptions | async" [value]="addressee">
