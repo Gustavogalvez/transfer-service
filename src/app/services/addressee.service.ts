@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../environments/environment';
 import { IAddressee } from '../models/Addressee.model';
 
 @Injectable({
@@ -15,8 +15,8 @@ export class AddresseeService {
 
   constructor(private http: HttpClient) {}
 
-  retrieveAddressees(): Observable<IAddressee[]> {
-    return this.http.get<IAddressee[]>(this.apiUrl + 'list');
+  retrieveAddressees(search?: string): Observable<IAddressee[]> {
+    return this.http.get<IAddressee[]>(this.apiUrl + 'list' + (search ? `/${search}` : ''));
   }
 
   newAddressee(addressee: IAddressee) {

@@ -1,0 +1,48 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="mat-elevation-z2 rounded-lg p-2 w-100">
+      <h1 class="text-center">Transferir</h1>
+      <form class="col-md-6 mx-auto">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Buscar Destinatario...</mat-label>
+          <input
+            type="text"
+            placeholder="Pick one"
+            aria-label="Destinatario"
+            matInput
+            [formControl]="addressee"
+            [matAutocomplete]="auto" required>
+
+          <mat-spinner matSuffix *ngIf="loading" [diameter]="30"></mat-spinner>
+          <mat-error *ngIf="addressee.invalid">Debe ingresar un destinatario valido!</mat-error>
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="addBanco()" [displayWith]="displayFn">
+            <mat-option *ngFor="let addressee of filteredOptions | async" [value]="addressee">
+              {{addressee.nombre}}
+              <small>
+                {{addressee.rut}}
+              </small>
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </form>
+      <div class="col-md-6 mb-3 mx-auto" *ngIf="addressee?.value?.nombre">
+        <p class="mat-elevation-z2 rounded-lg p-2">
+          <b>Nombre: </b> {{addressee?.value?.nombre}} <br>
+          <b>Rut: </b> {{addressee?.value?.rut}} <br>
+          <b>Correo: </b> {{addressee?.value?.correo}} <br>
+          <b>Teléfono: </b> {{addressee?.value?.telefono}} <br>
+          <b>Banco: </b> {{addressee?.value?.banco?.label}} <br>
+        </p>
+      </div>
+      <mat-form-field appearance="outline" class="col-md-6 d-flex mx-auto">
+        <mat-label>Monto</mat-label>
+        <input [(ngModel)]="monto" pattern="[1-9][0-9]*" type="tel" matInput placeholder="Monto" required>
+        <mat-error *ngIf="monto <= 0">El monto debe ser mayor a 0!</mat-error>
+        <mat-icon matPrefix>attach_money</mat-icon>
+      </mat-form-field>
+      <div class="col-12 mt-3 text-center">
+        <button mat-raised-button color="primary" (click)="transferir()">Transferir</button>
+      </div>
+    </div>
+  </div>
+</div>

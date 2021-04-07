@@ -10,6 +10,10 @@ const routes: Routes = [
       {
         path: 'new-addressee',
         loadChildren: () => import('./pages/new-addressee/new-addressee.module').then(m => m.NewAddresseeModule)
+      },
+      {
+        path: 'transfer',
+        loadChildren: () => import('./pages/transfer/transfer.module').then(m => m.TransferModule)
       }
     ]
   },
