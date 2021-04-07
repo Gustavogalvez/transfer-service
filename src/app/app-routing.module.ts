@@ -14,6 +14,10 @@ const routes: Routes = [
       {
         path: 'transfer',
         loadChildren: () => import('./pages/transfer/transfer.module').then(m => m.TransferModule)
+      },
+      {
+        path: 'records',
+        loadChildren: () => import('./pages/records/records.module').then(m => m.RecordsModule)
       }
     ]
   },

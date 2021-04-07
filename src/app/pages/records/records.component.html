@@ -1,0 +1,30 @@
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="mat-elevation-z2 rounded-lg p-2 w-100">
+      <h1 class="text-center">Historial</h1>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Rut</th>
+              <th>Banco</th>
+              <th>Tipo de Cuenta</th>
+              <th>Monto</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let transfer of transfers">
+              <td scope="row">{{transfer.nombre}}</td>
+              <td>{{transfer.rut}}</td>
+              <td>{{transfer.banco?.label}}</td>
+              <td>{{transfer.tipo_cuenta}}</td>
+              <td>{{transfer.monto | currency: 'CLP'}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
