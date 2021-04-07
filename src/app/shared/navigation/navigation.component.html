@@ -3,11 +3,19 @@
     <div class="row d-flex">
       <span>Mi Banco</span>
       <span *ngIf="dataSharedService.breadCrumb"> - {{dataSharedService.breadCrumb}}</span>
-      <div class="ml-auto">
-        <button mat-flat-button routerLink="new-addressee" class="mx-2">Nuevo Destinatario</button>
-        <button mat-flat-button routerLink="transfer" class="mx-2">Transferir</button>
-        <button mat-flat-button routerLink="records" class="mx-2">Historial</button>
+      <div class="ml-auto d-none d-md-block">
+        <button mat-flat-button routerLink="new-addressee" routerLinkActive="mat-elevation-z6 bg-light" class="mx-2">Nuevo Destinatario</button>
+        <button mat-flat-button routerLink="transfer" routerLinkActive="mat-elevation-z6 bg-light" class="mx-2">Transferir</button>
+        <button mat-flat-button routerLink="records" routerLinkActive="mat-elevation-z6 bg-light" class="mx-2">Historial</button>
       </div>
+      <button class="d-block d-md-none ml-auto" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLink="new-addressee" routerLinkActive="mat-elevation-z2 bg-light">Nuevo Destinatario</button>
+        <button mat-menu-item routerLink="transfer" routerLinkActive="mat-elevation-z2 bg-light">Transferir</button>
+        <button mat-menu-item routerLink="records" routerLinkActive="mat-elevation-z2 bg-light">Historial</button>
+      </mat-menu>
     </div>
   </div>
 </mat-toolbar>

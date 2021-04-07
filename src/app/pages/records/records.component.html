@@ -15,9 +15,10 @@
             </tr>
           </thead>
           <tbody *ngIf="transfers?.length === 0">
-            <tr>
-              <td class="text-center text-warning" colspan="5">No existen datos de transferencias!</td>
-            </tr>
+            <tr><td class="text-center text-warning" colspan="5">No existen datos de transferencias!</td></tr>
+          </tbody>
+          <tbody *ngIf="!transfers" >
+            <tr><td colspan="5"><mat-progress-bar mode="query"></mat-progress-bar></td></tr>
           </tbody>
           <tbody>
             <tr *ngFor="let transfer of transfers">

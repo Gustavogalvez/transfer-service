@@ -18,6 +18,9 @@ const routes: Routes = [
       {
         path: 'records',
         loadChildren: () => import('./pages/records/records.module').then(m => m.RecordsModule)
+      },
+      {
+        path: '', redirectTo: 'new-addressee', pathMatch: 'full'
       }
     ]
   },

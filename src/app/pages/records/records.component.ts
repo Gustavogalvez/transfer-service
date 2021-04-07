@@ -18,16 +18,14 @@ export class RecordsComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    forkJoin(
+    forkJoin([
       this.transferService.listTransfer(),
       this.dataSharedService.listBank()
-    )
-    .subscribe((data: any) => {
+    ]).subscribe((data: any) => {
       let bancos = data[1];
       this.transfers = data[0].map((transfer: ITransfer) => {
         return {...transfer, banco: bancos.find((banco: any) =>  banco.value.includes(transfer.banco_id))}
       });
-      console.log(this.transfers);
     });
   }
 
