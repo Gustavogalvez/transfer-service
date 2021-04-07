@@ -8,8 +8,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-@Injectable()
-export class AuthInterceptorInterceptor implements HttpInterceptor {
+@Injectable({ providedIn: 'root' })
+export class AlertInterceptor implements HttpInterceptor {
 
   constructor(
     private _snackBar: MatSnackBar
@@ -34,8 +34,8 @@ export class AuthInterceptorInterceptor implements HttpInterceptor {
   errorDefault(err: HttpErrorResponse) {
     console.warn(err);
     let msg = err.error.msg;
-    this._snackBar.open('Error en: ' + msg, 'close', {
-      duration: 3000,
+    this._snackBar.open('Error en: ' + msg, 'cerrar', {
+      duration: 5000,
     });
   }
 }

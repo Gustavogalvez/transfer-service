@@ -28,8 +28,31 @@ export class FieldsNewAdressee {
     {
       fieldGroupClassName: 'row',
       fieldGroup: [
-        this.getSimpleForm('correo',undefined,true),
-        this.getSimpleForm('telefono', 'Teléfono')
+        {
+          className: 'col-md-6',
+          type: 'input',
+          key: 'correo',
+          validation: {
+            messages: {
+              pattern: 'Debe ser un email valido!'
+            }
+          },
+          templateOptions: {
+            required: true,
+            label: 'Correo',
+            pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+          },
+        },
+        {
+          className: 'col-md-6',
+          type: 'input',
+          key: 'telefono',
+          templateOptions: {
+            required: true,
+            label: 'Teléfono',
+            type: 'number'
+          },
+        }
       ],
     },
     {
@@ -45,7 +68,20 @@ export class FieldsNewAdressee {
             options: this.dataSharedService.listBank()
           }
         },
-        this.getSimpleForm('tipo_cuenta', 'Tipo de Cuenta', true)
+        {
+          className: 'col-md-6',
+          key: 'tipo_cuenta',
+          type: 'select',
+          templateOptions: {
+            label: 'Tipo de Cuenta',
+            required: true,
+            options: [
+              { value: 'Vista', label: 'Cuenta Vista' },
+              { value: 'Corriente', label: 'Cuenta Corriente'  },
+              { value: 'Ahorro', label: 'Cuenta de Ahorro'  },
+            ],
+          },
+        },
       ],
     },
     {
@@ -63,7 +99,7 @@ export class FieldsNewAdressee {
       key: key,
       templateOptions: {
         required: required,
-        label: label ?? (key[0].toLocaleUpperCase() + key.slice(1)),
+        label: label ?? (key[0].toLocaleUpperCase() + key.slice(1))
       },
     }
   }

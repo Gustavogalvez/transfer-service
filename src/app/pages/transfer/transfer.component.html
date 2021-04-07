@@ -7,7 +7,7 @@
           <mat-label>Buscar Destinatario...</mat-label>
           <input
             type="text"
-            placeholder="Pick one"
+            placeholder="Escoge un destinatario..."
             aria-label="Destinatario"
             matInput
             [formControl]="addressee"
@@ -41,8 +41,9 @@
         <mat-icon matPrefix>attach_money</mat-icon>
       </mat-form-field>
       <div class="col-12 mt-3 text-center">
-        <button mat-raised-button color="primary" (click)="transferir()">Transferir</button>
+        <button mat-raised-button color="primary" [disabled]="sinDestinatario" *ngIf="!loadingSendData" (click)="transferir()">Transferir</button>
       </div>
+      <mat-progress-bar *ngIf="loadingSendData" mode="query"></mat-progress-bar>
     </div>
   </div>
 </div>
